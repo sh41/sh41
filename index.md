@@ -1,6 +1,7 @@
 # Markdown Experiments
 
 ```php
+<?php 
 // comments 
 
 function add(a, b) {
