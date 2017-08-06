@@ -1,7 +1,6 @@
 # Markdown Experiments
 
-```php
-<?php 
+```php?start_inline=1
 // comments 
 
 function add(a, b) {
