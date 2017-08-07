@@ -1,6 +1,7 @@
 ---
 title: Gitlab Omnibus with Docker Repository Housekeeping
-layout: post
+layout: default
+tags: gitlab docker
 ---
 I do love a bit of [Github](https://github.com), but for our commercial work we needed a local install so we've been using an internal installation of [Gitlab-CE Omnibus edition](https://about.gitlab.com/installation/) for the past year and generally it works quite well for our purposes. 
 
