@@ -17,7 +17,7 @@ The root cause appears to be that docker's registry installed with Gitlab-CE Omn
 
 There is a `/usr/bin/gitlab-ctl registry-garbage-collect` command that stops the registry service invokes the docker built in garbage collection and then starts the registry service again, but unless you have deleted the reference to the image in the Gitlab UI nothing will be GC'd and if you've overwritten an image with one of the same name, you can't actually trigger a delete.
 
-The solution ended up being slightyly more long winded than I'd prefer (and scarily marked as expermimental), but it appears to work for now, so there you go: 
+The solution ended up being slightly more long winded than I'd prefer (and scarily marked as expermimental), but it appears to work for now, so there you go: 
 Install [Docker Distribution Pruner](https://gitlab.com/gitlab-org/docker-distribution-pruner). Checkout https://gitlab.com/gitlab-org/docker-distribution-pruner/issues/2 for a step by step of getting go installed. 
 
 Add the pruner and the Garbage Collection scripts to run before the backup cronjob: 
