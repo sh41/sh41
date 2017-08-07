@@ -1,4 +1,5 @@
 theme: jekyll-theme-slate
-name: Stuff
+title: Stuff
+description: One place to keep all the things I sometimes need to remember. 
 footer-links:
   github: sh41
