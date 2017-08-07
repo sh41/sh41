@@ -12,11 +12,11 @@ All was well for the first couple of months, but this morning something wasn't q
 
 To cut a long story short we narrow it down to the nightly backups. Each nightly backup was coming in at 6GiB and keeping 7 days of backup online meant that over 40GiB of space was being used by the backups. I removed the oldest backup and the service was back up and running again, but 6GiB seemed a bit high to me so I dug further. 
 
-To cut a long story short the docker registry installed with Gitlab-CE Omnibus edition never cleans up old images, so for every build pushed to the registry - even if it overwrites a build of the same tag, the space is not reclaimed. 
+The root cause appears to be that docker's registry installed with Gitlab-CE Omnibus edition never cleans up old images, so for every build pushed to the registry - even if it overwrites a build of the same tag, the space is not reclaimed. 
 
 There is a `/usr/bin/gitlab-ctl registry-garbage-collect` command that stops the registry service invokes the docker built in garbage collection and then starts the registry service again, but unless you have deleted the reference to the image in the Gitlab UI nothing will be GC'd and if you've overwritten an image with one of the same name, you can't actually trigger a delete.
 
-The solution ened up being slightyly more long winded than I'd prefer (and scarily marked as expermimental), but it appears to work for now, so here you go: 
+The solution ended up being slightyly more long winded than I'd prefer (and scarily marked as expermimental), but it appears to work for now, so there you go: 
 Install [Docker Distribution Pruner](https://gitlab.com/gitlab-org/docker-distribution-pruner). Checkout https://gitlab.com/gitlab-org/docker-distribution-pruner/issues/2 for a step by step of getting go installed. 
 
 Add the pruner and the Garbage Collection scripts to run before the backup cronjob: 
